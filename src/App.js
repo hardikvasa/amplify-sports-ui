@@ -27,24 +27,13 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <AmplifyAuthenticator>
-      <AmplifySignIn
-        headerText='AnyCompany video team, Sign-In with Your E-Mail Address'
-        slot='sign-in'
-      />
-      <AmplifySignUp
-        headerText='AnyCompany video team, Sign-Up with Your E-Mail Address'
-        slot='sign-up'
-      />
+      
       <div data-vjs-player style={{
           width: 540, height: 320
         }}>
         <video  ref={(node) => { this.videoNode = node; }} className="video-js" />
       </div>
-      <div className='sign-out'>
-        <AmplifySignOut />
-      </div>
-    </AmplifyAuthenticator>
+      
 
     );
   }
@@ -62,10 +51,23 @@ const videoJsOptions2 = {autoplay: false, controls: true,
 
 function App() {
   return (
+    /*
+    <AmplifyAuthenticator>
+      <AmplifySignIn
+        headerText='AnyCompany video team, Sign-In with Your E-Mail Address'
+        slot='sign-in'
+      />
+      <AmplifySignUp
+        headerText='AnyCompany video team, Sign-Up with Your E-Mail Address'
+        slot='sign-up'
+      />
+      */
+
     <div>
       <nav style={nav}>
         <p style={navHeading}>Live Streaming with React & AWS</p>
       </nav>
+      
       <div style={container}>
         <table>
           <tr>
@@ -82,7 +84,14 @@ function App() {
           </tr>
         </table>
       </div>
-    </div>
+      </div>
+
+      /*
+      <div className='sign-out'>
+        <AmplifySignOut />
+      </div>
+    </AmplifyAuthenticator>
+    */
   );
 }
 
