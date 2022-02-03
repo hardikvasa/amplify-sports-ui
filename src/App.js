@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-import Amplify, { Storage } from 'aws-amplify'
+import Amplify from 'aws-amplify'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 import {
