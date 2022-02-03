@@ -51,7 +51,7 @@ const videoJsOptions2 = {autoplay: false, controls: true,
 
 function App() {
   return (
-    /*
+  
     <AmplifyAuthenticator>
       <AmplifySignIn
         headerText='AnyCompany video team, Sign-In with Your E-Mail Address'
@@ -61,7 +61,7 @@ function App() {
         headerText='AnyCompany video team, Sign-Up with Your E-Mail Address'
         slot='sign-up'
       />
-      */
+      
 
     <div>
       <nav style={nav}>
@@ -86,12 +86,12 @@ function App() {
       </div>
       </div>
 
-      /*
+      
       <div className='sign-out'>
         <AmplifySignOut />
       </div>
     </AmplifyAuthenticator>
-    */
+    
   );
 }
 
