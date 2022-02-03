@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
 import Amplify, { Storage } from 'aws-amplify'
-import awsvideoconfig from './aws-video-exports'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 import {
@@ -28,7 +27,6 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-
       <AmplifyAuthenticator>
       <AmplifySignIn
         headerText='AnyCompany video team, Sign-In with Your E-Mail Address'
@@ -39,11 +37,10 @@ class VideoPlayer extends React.Component {
         slot='sign-up'
       />
       <div data-vjs-player style={{
-          width: 960, height: 540
+          width: 540, height: 320
         }}>
         <video  ref={(node) => { this.videoNode = node; }} className="video-js" />
       </div>
-
       <div className='sign-out'>
         <AmplifySignOut />
       </div>
@@ -53,12 +50,14 @@ class VideoPlayer extends React.Component {
   }
 }
 
-const videoJsOptions = {
-  autoplay: true,
-  controls: true,
-  sources: [{
-    src: awsvideoconfig.awsOutputLiveLL,
-  }]
+const vidArr = ["https://parth-demo-bucket.s3.us-east-2.amazonaws.com/F1.mp4","https://parth-demo-bucket.s3.us-east-2.amazonaws.com/F2.mp4"]
+
+const videoJsOptions = {autoplay: false, controls: true,
+  sources: [{src: vidArr[0]}]
+}
+
+const videoJsOptions2 = {autoplay: false, controls: true,
+  sources: [{src: vidArr[1]}]
 }
 
 function App() {
@@ -68,7 +67,20 @@ function App() {
         <p style={navHeading}>Live Streaming with React & AWS</p>
       </nav>
       <div style={container}>
-        <VideoPlayer { ...videoJsOptions } />
+        <table>
+          <tr>
+            <th>Video</th>
+            <th>Vote</th>
+          </tr>
+          <tr>
+            <td><VideoPlayer { ...videoJsOptions } /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><VideoPlayer { ...videoJsOptions2 } /></td>
+            <td></td>
+          </tr>
+        </table>
       </div>
     </div>
   );
