@@ -306,7 +306,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 's3fileupload223bc535_identitypool_223bc535', !Join ['',['s3fileupload223bc535_identitypool_223bc535', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'amplifysportsui223bc535_identitypool_223bc535', !Join ['',['amplifysportsui223bc535_identitypool_223bc535', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient
