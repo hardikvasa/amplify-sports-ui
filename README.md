@@ -11,3 +11,4 @@ Accepts images and videos
 ## 💫 Deploy
 
 [![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/sigitp-git/s3fileupload-react-amplify)
+
