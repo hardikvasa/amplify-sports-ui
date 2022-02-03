@@ -1,0 +1,41 @@
+{
+  "videoupl": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-s3fileupload-videoupl-175031-authRole",
+      "UnauthRoleArn": "arn:aws:iam::989480987093:role/amplify-s3fileupload-videoupl-175031-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::989480987093:role/amplify-s3fileupload-videoupl-175031-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-s3fileupload-videoupl-175031-deployment",
+      "UnauthRoleName": "amplify-s3fileupload-videoupl-175031-unauthRole",
+      "StackName": "amplify-s3fileupload-videoupl-175031",
+      "StackId": "arn:aws:cloudformation:us-east-1:989480987093:stack/amplify-s3fileupload-videoupl-175031/f71b70b0-a77e-11ea-a8de-0a8540e42a70",
+      "AmplifyAppId": "d1n8y57gwg9ln4"
+    },
+    "categories": {
+      "auth": {
+        "s3fileupload223bc535": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-s3fileupload-dev-02625-authRole",
+      "UnauthRoleArn": "arn:aws:iam::281947148086:role/amplify-s3fileupload-dev-02625-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::281947148086:role/amplify-s3fileupload-dev-02625-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-s3fileupload-dev-02625-deployment",
+      "UnauthRoleName": "amplify-s3fileupload-dev-02625-unauthRole",
+      "StackName": "amplify-s3fileupload-dev-02625",
+      "StackId": "arn:aws:cloudformation:us-east-1:281947148086:stack/amplify-s3fileupload-dev-02625/d1f48720-8401-11ec-bd54-0a0fdb485923",
+      "AmplifyAppId": "d3hvjmuh9yrxhn"
+    },
+    "categories": {
+      "auth": {
+        "s3fileupload223bc535": {}
+      },
+      "function": {
+        "S3Trigger9e5c4e59": {}
+      }
+    }
+  }
+}
