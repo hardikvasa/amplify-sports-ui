@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './App.css'
 import Amplify from 'aws-amplify'
 import videojs from 'video.js'
@@ -10,13 +10,17 @@ import {
   AmplifySignUp,
 } from '@aws-amplify/ui-react'
 import { MdSend /* MdList */ } from 'react-icons/md'
+import axios from 'axios'
 import awsConfig from './aws-exports'
+const thumbs_up = require('./assets/thumbs_up.png');
+const thumbs_down = require('./assets/thumbs_down.png');
 Amplify.configure(awsConfig)
 
 
 class VideoPlayer extends React.Component {
+
   componentDidMount() {
-    this.player = videojs(this.videoNode, this.props)
+    this.player = videojs(this.videoNode, this.props);
   }
 
   componentWillUnmount() {
@@ -39,17 +43,49 @@ class VideoPlayer extends React.Component {
   }
 }
 
-const vidArr = ["https://parth-demo-bucket.s3.us-east-2.amazonaws.com/F1.mp4","https://parth-demo-bucket.s3.us-east-2.amazonaws.com/F2.mp4"]
+/*
+function xyz (callback) { 
+  axios.get(`https://56lor2kfz8.execute-api.us-east-1.amazonaws.com/test/videos`)
+    .then(res => {
+      const filepath = res.data.Items[0].filepath.S
+      callback ({autoplay: false, controls: true,sources: [{src: filepath}]})
+    }).catch(err =>{
+      console.log(err);
+    })
+  }
+*/
 
-const videoJsOptions = {autoplay: false, controls: true,
-  sources: [{src: vidArr[0]}]
-}
+const useFetchData = (url) => {
+  const [state, setState] = useState({ isLoading: true, error: null, data: null });
+  useEffect(() => {
+    //let isMounted = true;  
+    axios.get(url)
+      .then((res) => {
+        setState({ isLoading: false, data: [{autoplay: false, controls: true,sources: [{src: res.data.Items[0].filepath.S}]},{autoplay: false, controls: true,sources: [{src: res.data.Items[1].filepath.S}]},{autoplay: false, controls: true,sources: [{src: res.data.Items[2].filepath.S}]}], error: null });
+      })
+      .catch((error) => {
+        setState({ isLoading: false, data: null, error });
+      });
+  }, [url]);
+  return state;
+};
 
-const videoJsOptions2 = {autoplay: false, controls: true,
-  sources: [{src: vidArr[1]}]
-}
+function populateDate(username,video,vote){
+    console.log(username,video,vote);
+    axios.post('https://dcyxom2xcc.execute-api.us-east-1.amazonaws.com/prod/updaterecord', {
+      username: username,
+      video: video,
+      vote: vote
+    })
+  };
+
 
 function App() {
+
+  const { isLoading, data, error } = useFetchData("https://56lor2kfz8.execute-api.us-east-1.amazonaws.com/test/videos");
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>There was an error: {error}</div>;
+
   return (
   
     <AmplifyAuthenticator>
@@ -70,18 +106,24 @@ function App() {
       
       <div style={container}>
         <table>
-          <tr>
-            <th>Video</th>
-            <th>Vote</th>
-          </tr>
-          <tr>
-            <td><VideoPlayer { ...videoJsOptions } /></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><VideoPlayer { ...videoJsOptions2 } /></td>
-            <td></td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Video</th>
+              <th>Vote</th>
+            </tr>
+            <tr>
+              <td><VideoPlayer { ...data[0] } /></td>
+              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[0].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[0].sources[0].src,'downvote')} /></td>
+            </tr>
+            <tr>
+              <td><VideoPlayer { ...data[1] } /></td>
+              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[1].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[1].sources[0].src,'downvote')} /></td>
+            </tr>
+            <tr>
+              <td><VideoPlayer { ...data[2] } /></td>
+              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[2].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[2].sources[0].src,'downvote')} /></td>
+            </tr>
+          </tbody>
         </table>
       </div>
       </div>

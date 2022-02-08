@@ -8,11 +8,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "aws-amplify": "^3.0.16",
+    "axios": "^0.19.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
     "react-icons": "^3.10.0",
     "react-scripts": "^3.4.1",
+    "uuidv4": "^6.2.12",
     "video.js": "^7.17.0"
   },
   "scripts": {
