@@ -61,7 +61,32 @@ const useFetchData = (url) => {
     //let isMounted = true;  
     axios.get(url)
       .then((res) => {
-        setState({ isLoading: false, data: [{autoplay: false, controls: true,sources: [{src: res.data.Items[0].filepath.S}]},{autoplay: false, controls: true,sources: [{src: res.data.Items[1].filepath.S}]},{autoplay: false, controls: true,sources: [{src: res.data.Items[2].filepath.S}]}], error: null });
+        console.log(res.data.Items.length)
+        if(res.data.Items.length === 3){
+          setState(
+          { isLoading: false, data: [
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[0].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[1].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[2].filepath.S}]}], 
+            error: null });
+        } else if (res.data.Items.length === 4){
+          setState(
+          { isLoading: false, data: [
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[0].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[1].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[2].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[3].filepath.S}]}], 
+            error: null });
+        } else if (res.data.Items.length === 5){
+          setState(
+          { isLoading: false, data: [
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[0].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[1].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[2].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[3].filepath.S}]},
+            {autoplay: false, controls: true,sources: [{src: res.data.Items[4].filepath.S}]}], 
+            error: null });
+        }
       })
       .catch((error) => {
         setState({ isLoading: false, data: null, error });
@@ -87,7 +112,8 @@ function App() {
   if (error) return <div>There was an error: {error}</div>;
 
   return (
-  
+    
+    
     <AmplifyAuthenticator>
       <AmplifySignIn
         headerText='AnyCompany video team, Sign-In with Your E-Mail Address'
@@ -97,34 +123,29 @@ function App() {
         headerText='AnyCompany video team, Sign-Up with Your E-Mail Address'
         slot='sign-up'
       />
-      
+    
 
     <div>
       <nav style={nav}>
-        <p style={navHeading}>Live Streaming with React & AWS</p>
+        <p style={navHeading}>AnyCompany Sports Streaming</p>
       </nav>
       
       <div style={container}>
+        
         <table>
           <tbody>
             <tr>
               <th>Video</th>
               <th>Vote</th>
             </tr>
-            <tr>
-              <td><VideoPlayer { ...data[0] } /></td>
-              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[0].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[0].sources[0].src,'downvote')} /></td>
-            </tr>
-            <tr>
-              <td><VideoPlayer { ...data[1] } /></td>
-              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[1].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[1].sources[0].src,'downvote')} /></td>
-            </tr>
-            <tr>
-              <td><VideoPlayer { ...data[2] } /></td>
-              <td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',data[2].sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',data[2].sources[0].src,'downvote')} /></td>
-            </tr>
+            {data.map(function(object, i){
+              //console.log(object);
+                return <tr><td><VideoPlayer { ...object  }/></td><td><img src={thumbs_up} alt="Thumbs Up" onClick={() => populateDate('hnvasa@gmail.com',object.sources[0].src,'upvote')} /><img src={thumbs_down} alt="Thumbs Down" onClick={() => populateDate('hnvasa@gmail.com',object.sources[0].src,'downvote')} /></td></tr>;
+            })}
           </tbody>
         </table>
+
+
       </div>
       </div>
 
@@ -133,6 +154,7 @@ function App() {
         <AmplifySignOut />
       </div>
     </AmplifyAuthenticator>
+    
     
   );
 }
